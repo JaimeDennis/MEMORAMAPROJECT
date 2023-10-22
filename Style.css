@@ -22,8 +22,8 @@ table{
 td {
     border: 2px solid #ffffff;
     border-radius: 15px;
-    width: 150px; 
-    height: 200px;
+    width: 100px; 
+    height: 150px;
     cursor: pointer;
     background-image: url(./Imagenes/Baraja.jpeg);
     background-size: cover;

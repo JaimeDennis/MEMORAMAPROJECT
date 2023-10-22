@@ -8,6 +8,35 @@
     <script>
         let primeraImagen = null;
 
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function resetearJuego() {
+            const imagenes = [
+                { id: 1, src: "./Imagenes/ArtTheClown.jpeg" },
+                { id: 2, src: "./Imagenes/Freddy.jpeg" },
+                { id: 3, src: "./Imagenes/BOBA.jpg" },
+                { id: 4, src: "./Imagenes/Michael.jpeg" },
+                { id: 5, src: "./Imagenes/Chucky.jpeg" },
+                { id: 6, src: "./Imagenes/Ghostface.jpeg" }
+            ];
+            
+            const imagenesAleatorias = shuffleArray(imagenes.concat(imagenes)); // Duplica las imágenes y las mezcla
+            const celdas = document.querySelectorAll('.tablauno td');
+            celdas.forEach((celda, index) => {
+                const imagen = celda.querySelector('img');
+                imagen.src = imagenesAleatorias[index].src;
+                imagen.setAttribute('data-id', imagenesAleatorias[index].id);
+                imagen.style.display = 'none';
+            });
+            primeraImagen = null;
+        }
+
         function MostrarCarta(celda) {
             const imagen = celda.querySelector('img');
             const imagenId = imagen.getAttribute('data-id');
@@ -29,6 +58,12 @@
                 }, 500); // 1000 ms (1 segundo)
             }
         }
+        // Llama a la función de reset al cargar la página
+        window.onload = resetearJuego;
+
+        // Asocia la función de reset al botón Reset
+        const botonReset = document.querySelector('.boton-reset');
+        botonReset.addEventListener('click', resetearJuego);
     </script>
 </head>
 <body>

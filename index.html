@@ -5,25 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEMORAMA</title>
     <link rel="stylesheet" href="Style.css">
+    <script>
+        let primeraImagen = null;
+
+        function MostrarCarta(celda) {
+            const imagen = celda.querySelector('img');
+            const imagenId = imagen.getAttribute('data-id');
+
+            if (primeraImagen === null) {
+            primeraImagen = { id: imagenId, elemento: imagen };
+            imagen.style.display = 'block';
+            } else {
+                imagen.style.display = 'block';
+                setTimeout(() => {
+                    if (primeraImagen.id === imagenId) {
+                        // Si son iguales, mantén ambas imágenes visibles
+                    } else {
+                        // Si son diferentes, oculta la primera imagen y la nueva
+                        primeraImagen.elemento.style.display = 'none';
+                        imagen.style.display = 'none';
+                    }
+                    primeraImagen = null;
+                }, 500); // 1000 ms (1 segundo)
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>MEMORAMA</h1>
     
-    <table>
+    <table class="tablauno">
         <tr>
-            <td> <img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td>
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="3"></td>
         </tr>
         <tr>
-            <td><img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td>
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/Freddy.jpeg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="6"></td>
         </tr>
         <tr>
-            <td><img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td> <td><img src="./Imagenes/ArtTheClown.jpeg"></td>
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/BOBA.jpg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="5"></td>
         </tr>
     </table>
-
-    <button id="Botones" >4x3</button>
-    <button id="Botones">4x4</button>
-    <button id="Botones">4x5</button>
-    <button id="Botones">4x6</button>
+    <div class="botones">
+        <button >4x3</button>
+        <button >4x4</button>
+        <button >4x5</button>
+        <button >4x6</button>
+        <button class="boton-reset">Reset</button>
+    </div>
 </body>
 </html>

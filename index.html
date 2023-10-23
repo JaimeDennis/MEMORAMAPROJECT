@@ -1,11 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MEMORAMA</title>
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="Style.css" />
+    <script>
+      let primeraImagen = null;
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      function resetearJuego() {
+        const imagenes = [
+          { id: 1, src: "./Imagenes/ArtTheClown.jpeg" },
+          { id: 2, src: "./Imagenes/Freddy.jpeg" },
+          { id: 3, src: "./Imagenes/BOBA.jpg" },
+          { id: 4, src: "./Imagenes/Michael.jpeg" },
+          { id: 5, src: "./Imagenes/JigSaw.jpg" },
+          { id: 6, src: "./Imagenes/Chucky.jpeg" },
+          { id: 7, src: "./Imagenes/Ghostface.jpeg" },
+          { id: 8, src: "./Imagenes/PENYWISE.jpg" },
+          { id: 9, src: "./Imagenes/JASON.jpg"},
+          { id: 10, src: "./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg"}
+
+        ];
+
+        const imagenesAleatorias = shuffleArray(imagenes.concat(imagenes)); // Duplica las imágenes y las mezcla
+        const celdas = document.querySelectorAll(".tablauno td");
+        celdas.forEach((celda, index) => {
+          const imagen = celda.querySelector("img");
+          imagen.src = imagenesAleatorias[index].src;
+          imagen.setAttribute("data-id", imagenesAleatorias[index].id);
+          imagen.style.display = "none";
+        });
+        primeraImagen = null;
+      }
+
+      function MostrarCarta(celda) {
+        const imagen = celda.querySelector("img");
+        const imagenId = imagen.getAttribute("data-id");
+
+        if (primeraImagen === null) {
+          primeraImagen = { id: imagenId, elemento: imagen };
+          imagen.style.display = "block";
+        } else {
+          imagen.style.display = "block";
+          setTimeout(() => {
+            if (primeraImagen.id === imagenId) {
+              // Si son iguales, mantén ambas imágenes visibles
+            } else {
+              // Si son diferentes, oculta la primera imagen y la nueva
+              primeraImagen.elemento.style.display = "none";
+              imagen.style.display = "none";
+            }
+            primeraImagen = null;
+          }, 500); // 1000 ms (1 segundo)
+        }
+      }
+      // Llama a la función de reset al cargar la página
+      window.onload = resetearJuego;
+
+      // Asocia la función de reset al botón Reset
+      const botonReset = document.querySelector(".boton-reset");
+      botonReset.addEventListener("click", resetearJuego);
+    </script>
+  </head>
+  <body>
+      <h1>Juego de memorama</h1>
+      
+      <table class="tablauno">
+        <tr>
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/JigSaw.jpg" data-id="5"></td><td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td>
+        </tr>
+        <tr>
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/Ghostface.jpeg" data-id="7"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td><td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td>
+        </tr>
+        <tr>
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/JASON.jpg" data-id="9"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" data-id="10"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/JigSaw.jpg" data-id="5"></td><td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="7"></td>
+        </tr>
+        <tr>
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" data-id="10"></td><td onclick="MostrarCarta(this)"><img src="./Imagenes/JASON.jpg" data-id="9"></td>
+        </tr>
+      </table>  
+      <div class="botones">
+        <button>4x3</button>
+        <button>4x4</button>
+        <button>4x5</button>
+        <button>4x6</button>
+        <button class="boton-reset">Reset</button>
+      </div>
+  </body>
 </html>

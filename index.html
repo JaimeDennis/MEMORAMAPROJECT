@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="Style.css">
     <script>
         let primeraImagen = null;
-
+        let x=0;
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -17,6 +17,7 @@
         }
 
         function resetearJuego() {
+            x=0;
             const imagenes = [
                 { id: 1, src: "./Imagenes/ArtTheClown.jpeg" },
                 { id: 2, src: "./Imagenes/Freddy.jpeg" },
@@ -41,13 +42,21 @@
                 imagen.style.display = 'none';
             });
             primeraImagen = null;
+            document.getElementById('Winscreen').style.display='none';
+            document.getElementById('wincon').style.display='none';
+            document.getElementById('c1').style.display='block';
+            document.getElementById('c2').style.display='block';
+            document.getElementById('c3').style.display='block';
+            document.getElementById('c4').style.display='block';
         }
 
         function MostrarCarta(celda) {
             const imagen = celda.querySelector('img');
             const imagenId = imagen.getAttribute('data-id');
-
-            if (primeraImagen === null) {
+            if (imagen.style.display === 'block') {
+                
+            }else {
+                if (primeraImagen === null) {
             primeraImagen = { id: imagenId, elemento: imagen };
             imagen.style.display = 'block';
             } else {
@@ -55,6 +64,18 @@
                 setTimeout(() => {
                     if (primeraImagen.id === imagenId) {
                         // Si son iguales, mantén ambas imágenes visibles
+                        x=x+1;
+                        setTimeout(500);
+                        if (x === 1){
+                            document.getElementById('c1').style.display='none';
+                            document.getElementById('c2').style.display='none';
+                            document.getElementById('c3').style.display='none';
+                            document.getElementById('c4').style.display='none';
+                            document.getElementById('wincon').style.display='block';
+                            document.getElementById('Winscreen').style.display='block';
+                            document.getElementById('wincon').style.opacity=1;
+                            document.getElementById('Winscreen').style.opacity=1; 
+                        }
                     } else {
                         // Si son diferentes, oculta la primera imagen y la nueva
                         primeraImagen.elemento.style.display = 'none';
@@ -64,6 +85,8 @@
                 }, 500); // 1000 ms (1 segundo)
             }
         }
+            }
+            
         // Llama a la función de reset al cargar la página
         window.onload = resetearJuego;
 
@@ -74,18 +97,19 @@
 </head>
 <body>
     <h1>MEMORAMA</h1>
-    
+    <img src="./Imagenes/image.psd.jpg" alt="" width="device-width" hidden id="Winscreen">
+    <button id="wincon" onclick="resetearJuego(null)" hidden>Play again?</button>
     <table class="tablauno">
-        <tr>
+        <tr id="c1">
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td>
         </tr>
-        <tr>
+        <tr id="c2">
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="7"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/JASON.jpg" data-id="10"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/JASON.jpg" data-id="10"></td>
         </tr>
-        <tr>
+        <tr id="c3">
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="7"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/The thing.webp" data-id="11"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/The thing.webp" data-id="11"></td>
         </tr>
-        <tr>
+        <tr id="c4">
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" data-id="12"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" data-id="12"></td>
         </tr>
     </table>

@@ -1,5 +1,5 @@
 body{
-    background-color: #3c0c0c;
+    background-color: #000;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 23px;
     
@@ -22,15 +22,12 @@ table{
 td {
     border: 2px solid #ffffff;
     border-radius: 15px;
-    width: 100px; 
-    height: 150px;
+    width: 150px; 
+    height: 200px;
     cursor: pointer;
     background-image: url(./Imagenes/Baraja.jpeg);
     background-size: cover;
-    transition: 1s;
 }
-
-
 
 .botones{
     display: block;

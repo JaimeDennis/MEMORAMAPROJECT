@@ -8,6 +8,7 @@
     <script>
         let primeraImagen = null;
         let x=0;
+        let y=0;
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -18,6 +19,7 @@
 
         function resetearJuego() {
             x=0;
+            y=0;
             const imagenes = [
                 { id: 1, src: "./Imagenes/ArtTheClown.jpeg" },
                 { id: 2, src: "./Imagenes/Freddy.jpeg" },
@@ -51,7 +53,13 @@
         }
 
         function MostrarCarta(celda) {
-            const imagen = celda.querySelector('img');
+            if(y>2){
+                setTimeout(500);
+                y=0;
+            }s
+            y=y+1;
+            if(y<3){
+                const imagen = celda.querySelector('img');
             const imagenId = imagen.getAttribute('data-id');
             if (imagen.style.display === 'block') {
                 
@@ -63,10 +71,10 @@
                 imagen.style.display = 'block';
                 setTimeout(() => {
                     if (primeraImagen.id === imagenId) {
+                        y=y+1;
                         // Si son iguales, mantén ambas imágenes visibles
                         x=x+1;
-                        setTimeout(500);
-                        if (x === 1){
+                        if (x === 12){
                             document.getElementById('c1').style.display='none';
                             document.getElementById('c2').style.display='none';
                             document.getElementById('c3').style.display='none';
@@ -80,12 +88,15 @@
                         // Si son diferentes, oculta la primera imagen y la nueva
                         primeraImagen.elemento.style.display = 'none';
                         imagen.style.display = 'none';
+                        y=y+1;
                     }
                     primeraImagen = null;
                 }, 500); // 1000 ms (1 segundo)
             }
         }
-            }
+     }
+            
+ }
             
         // Llama a la función de reset al cargar la página
         window.onload = resetearJuego;
@@ -99,7 +110,7 @@
     <h1>MEMORAMA</h1>
     <img src="./Imagenes/image.psd.jpg" alt="" width="device-width" hidden id="Winscreen">
     <button id="wincon" onclick="resetearJuego(null)" hidden>Play again?</button>
-    <table class="tablauno">
+    <table id="tabla" class="tablauno">
         <tr id="c1">
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td>
         </tr>

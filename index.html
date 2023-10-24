@@ -6,6 +6,8 @@
     <title>MEMORAMA</title>
     <link rel="stylesheet" href="Style.css">
     <script>
+        var au=document.getElementById('aud');
+        var isPlaying=true;
         let primeraImagen = null;
         let totalpares=6;
         let x=0;
@@ -161,10 +163,21 @@
         window.onload = function() {
             resetearJuego(); 
         };
-
+        function mutemusic() {
+            if (isPlaying) {
+                aud.pause();
+                const button = document.getElementById("mute").innerText = "Play";
+            } else {
+                aud.play();
+                const button = document.getElementById("mute").innerText = "Pause";
+            }
+            isPlaying = !isPlaying;
+        }
     </script>
 </head>
 <body>
+    <button onclick="mutemusic(null)" id="mute">Pause</button>
+    <audio src="./Music/Unseen-Horrors.mp3" autoplay hidden loop id="aud"></audio>
     <h1>MEMORAMA</h1>
     <img src="./Imagenes/image.psd.jpg" alt="" width="device-width" hidden id="Winscreen">
     <button id="wincon" onclick="cambiarTabla(tid)" hidden>Play again?</button>

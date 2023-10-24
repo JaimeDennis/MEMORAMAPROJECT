@@ -72,16 +72,16 @@
             document.getElementById('Winscreen').style.display='none';
             document.getElementById('wincon').style.display='none';
             if(totalpares===6){
-                document.getElementById('tabla4x3').style.display='table';
+                document.getElementById('tabla4x3').style.display='grid';
             }
             if(totalpares===8){
-                document.getElementById('tabla4x4').style.display='table';
+                document.getElementById('tabla4x4').style.display='grid';
             }
             if(totalpare===10){
-                document.getElementById('tabla4x5').style.display='table';
+                document.getElementById('tabla4x5').style.display='grid';
             }
             if(totalpares===12){
-                document.getElementById('tabla4x6').style.display='table';
+                document.getElementById('tabla4x6').style.display='grid';
             }
         }
         //mucho
@@ -288,7 +288,7 @@
             </td> 
         </tr>
     </table>
-    <table id="tabla4x3" class="tablauno" style="display: table;">
+    <table id="tabla4x3" class="tablauno" style="display: grid;">
         <tr id="c1">
             <td onclick="MostrarCarta(this)"> 
                 <img src="./Imagenes/ArtTheClown.jpeg" data-id="1">

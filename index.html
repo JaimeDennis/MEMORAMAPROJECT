@@ -62,7 +62,7 @@
                 const imagen = celda.querySelector('img');
             const imagenId = imagen.getAttribute('data-id');
             if (imagen.style.display === 'block') {
-                
+                y=y-1;
             }else {
                 if (primeraImagen === null) {
             primeraImagen = { id: imagenId, elemento: imagen };

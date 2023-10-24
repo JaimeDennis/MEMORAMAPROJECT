@@ -159,10 +159,15 @@
         window.onload = function() {
             resetearJuego(); 
         };
+        function Audio() {
+            document.getElementById('aud').style.muted;
+        }
 
     </script>
 </head>
 <body>
+    <button onclick="Audio(null)">Mute</button>
+    <audio src="./Music/Unseen-Horrors.mp3" autoplay hidden loop id="aud"></audio>
     <h1>MEMORAMA</h1>
     <img src="./Imagenes/image.psd.jpg" alt="" width="device-width" hidden id="Winscreen">
     <button id="wincon" onclick="cambiarTabla(tid)" hidden>Play again?</button>

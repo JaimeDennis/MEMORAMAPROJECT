@@ -10,6 +10,7 @@
         let totalpares=6;
         let x=0;
         let y=0;
+        let tid='tabla4x3';
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -36,8 +37,8 @@
                 { id: 11, src: "./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" },
                 { id: 12, src: "./Imagenes/JASON.jpg" }
             ];
-            
-            if (totalpares > imagenes.length / 2) {
+            console.log(imagenes.length);
+            if (totalpares > imagenes.length) {
                 console.error("No hay suficientes imágenes para este número de pares.");
                 console.log(totalpares);
                 console.log(imagenes.length/2);
@@ -52,7 +53,9 @@
                     const imagenesParaTabla = imagenesAleatorias.slice(0, totalpares);
 
                     const pares = [];
-                    for (let i = 0; i < 6; i++) {
+                  
+                    for (let i = 0; i < totalpares; i++) {
+
                         pares.push(imagenesParaTabla[i], imagenesParaTabla[i]);
                     }
 
@@ -70,10 +73,18 @@
             primeraImagen = null;
             document.getElementById('Winscreen').style.display='none';
             document.getElementById('wincon').style.display='none';
-            document.getElementById('c1').style.display='block';
-            document.getElementById('c2').style.display='block';
-            document.getElementById('c3').style.display='block';
-            document.getElementById('c4').style.display='block';
+            if(totalpares===6){
+                document.getElementById('tabla4x3').style.display='grid';
+            }
+            if(totalpares===8){
+                document.getElementById('tabla4x4').style.display='grid';
+            }
+            if(totalpare===10){
+                document.getElementById('tabla4x5').style.display='grid';
+            }
+            if(totalpares===12){
+                document.getElementById('tabla4x6').style.display='grid';
+            }
         }
         //mucho
 
@@ -99,10 +110,11 @@
                                 y=y+1;
                                 x=x+1;
                                 if (x === totalpares){
-                                    document.getElementById('c1').style.display='none';
-                                    document.getElementById('c2').style.display='none';
-                                    document.getElementById('c3').style.display='none';
-                                    document.getElementById('c4').style.display='none';
+
+                                    document.getElementById('tabla4x3').style.display='none';
+                                    document.getElementById('tabla4x4').style.display='none';
+                                    document.getElementById('tabla4x5').style.display='none';
+                                    document.getElementById('tabla4x6').style.display='none';
                                     document.getElementById('wincon').style.display='block';
                                     document.getElementById('Winscreen').style.display='block';
                                     document.getElementById('wincon').style.opacity=1;
@@ -123,6 +135,7 @@
 
         function cambiarTabla(tablaId) {
             // Oculta todas las tablas
+            tid=tablaId;
             var todasLasTablas = document.querySelectorAll("table");
             todasLasTablas.forEach(function(tabla) {
                 tabla.style.display = "none";
@@ -145,7 +158,6 @@
                 resetearJuego();
             }
         }
-        
         window.onload = function() {
             resetearJuego(); 
         };
@@ -155,7 +167,7 @@
 <body>
     <h1>MEMORAMA</h1>
     <img src="./Imagenes/image.psd.jpg" alt="" width="device-width" hidden id="Winscreen">
-    <button id="wincon" onclick="resetearJuego()" hidden>Play again?</button>
+    <button id="wincon" onclick="cambiarTabla(tid)" hidden>Play again?</button>
     <table id="tabla4x6" class="tablauno" style="display: none;">
         <tr id="c1">
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td>
@@ -278,7 +290,7 @@
             </td> 
         </tr>
     </table>
-    <table id="tabla4x3" class="tablauno" style="display: table;">
+    <table id="tabla4x3" class="tablauno" style="display: grid;">
         <tr id="c1">
             <td onclick="MostrarCarta(this)"> 
                 <img src="./Imagenes/ArtTheClown.jpeg" data-id="1">

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="Style.css">
     <script>
         let primeraImagen = null;
+        let totalpares=6;
         let x=0;
         let y=0;
         function shuffleArray(array) {
@@ -17,32 +18,52 @@
             return array;
         }
 
-        function resetearJuego() {
-            x=0;
-            y=0;
-            const imagenes = [
-                { id: 1, src: "./Imagenes/ArtTheClown.jpeg" },
-                { id: 2, src: "./Imagenes/Freddy.jpeg" },
-                { id: 3, src: "./Imagenes/BOBA.jpg" },
-                { id: 4, src: "./Imagenes/Michael.jpeg" },
-                { id: 5, src: "./Imagenes/JigSaw.jpg" },
-                { id: 6, src: "./Imagenes/Chucky.jpeg" },
-                { id: 7, src: "./Imagenes/Ghostface.jpeg" },
-                { id: 8, src: "./Imagenes/PENYWISE.jpg" },
-                { id: 9, src: "./Imagenes/Sadako.webp" },
-                { id: 10, src: "./Imagenes/The thing.webp" },
-                { id: 11, src: "./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" },
-                { id: 8, src: "./Imagenes/JASON.jpg" }
-            ];
+    function resetearJuego() {
+        console.log(totalpares);
+        x = 0;
+        y = 0;
+        const imagenes = [
+            { id: 1, src: "./Imagenes/ArtTheClown.jpeg" },
+            { id: 2, src: "./Imagenes/Freddy.jpeg" },
+            { id: 3, src: "./Imagenes/BOBA.jpg" },
+            { id: 4, src: "./Imagenes/Michael.jpeg" },
+            { id: 5, src: "./Imagenes/JigSaw.jpg" },
+            { id: 6, src: "./Imagenes/Chucky.jpeg" },
+            { id: 7, src: "./Imagenes/Ghostface.jpeg" },
+            { id: 8, src: "./Imagenes/PENYWISE.jpg" },
+            { id: 9, src: "./Imagenes/Sadako.webp" },
+            { id: 10, src: "./Imagenes/The thing.webp" },
+            { id: 11, src: "./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" },
+            { id: 12, src: "./Imagenes/JASON.jpg" }
+        ];
+        
+        if (totalpares > imagenes.length / 2) {
+        console.error("No hay suficientes imágenes para este número de pares.");
+        return;}
+        const tablas = document.querySelectorAll('.tablauno');
+        
+        tablas.forEach((tabla) => {
+            if (tabla.style.display !== 'none') {
+                const imagenesAleatorias = shuffleArray(imagenes);
+                const celdas = tabla.querySelectorAll('td');
+                const imagenesParaTabla = imagenesAleatorias.slice(0, totalpares);
+
+                const pares = [];
+                for (let i = 0; i < 6; i++) {
+                    pares.push(imagenesParaTabla[i], imagenesParaTabla[i]);
+                }
+
+                const imagenesAleatoriasParaTabla = shuffleArray(pares);
+
+                celdas.forEach((celda, index) => {
+                    const imagen = celda.querySelector('img');
+                    imagen.src = imagenesAleatoriasParaTabla[index].src;
+                    imagen.setAttribute('data-id', imagenesAleatoriasParaTabla[index].id);
+                    imagen.style.display = 'none';
+                });
+            }
+        });
             
-            const imagenesAleatorias = shuffleArray(imagenes.concat(imagenes)); // Duplica las imágenes y las mezcla
-            const celdas = document.querySelectorAll('.tablauno td');
-            celdas.forEach((celda, index) => {
-                const imagen = celda.querySelector('img');
-                imagen.src = imagenesAleatorias[index].src;
-                imagen.setAttribute('data-id', imagenesAleatorias[index].id);
-                imagen.style.display = 'none';
-            });
             primeraImagen = null;
             document.getElementById('Winscreen').style.display='none';
             document.getElementById('wincon').style.display='none';
@@ -56,7 +77,7 @@
             if(y>2){
                 setTimeout(500);
                 y=0;
-            }s
+            }
             y=y+1;
             if(y<3){
                 const imagen = celda.querySelector('img');
@@ -72,9 +93,8 @@
                 setTimeout(() => {
                     if (primeraImagen.id === imagenId) {
                         y=y+1;
-                        // Si son iguales, mantén ambas imágenes visibles
                         x=x+1;
-                        if (x === 12){
+                        if (x === totalpares){
                             document.getElementById('c1').style.display='none';
                             document.getElementById('c2').style.display='none';
                             document.getElementById('c3').style.display='none';
@@ -85,32 +105,54 @@
                             document.getElementById('Winscreen').style.opacity=1; 
                         }
                     } else {
-                        // Si son diferentes, oculta la primera imagen y la nueva
                         primeraImagen.elemento.style.display = 'none';
                         imagen.style.display = 'none';
                         y=y+1;
                     }
                     primeraImagen = null;
-                }, 500); // 1000 ms (1 segundo)
+                }, 500);
             }
         }
      }
             
  }
-            
-        // Llama a la función de reset al cargar la página
-        window.onload = resetearJuego;
 
-        // Asocia la función de reset al botón Reset
-        const botonReset = document.querySelector('.boton-reset');
-        botonReset.addEventListener('click', resetearJuego);
-    </script>
+ function cambiarTabla(tablaId) {
+    // Oculta todas las tablas
+    var todasLasTablas = document.querySelectorAll("table");
+    todasLasTablas.forEach(function(tabla) {
+        tabla.style.display = "none";
+    });
+
+    // Muestra la tabla seleccionada
+    var tablaSeleccionada = document.getElementById(tablaId);
+    if (tablaSeleccionada) {
+        console.log(tablaId);
+        tablaSeleccionada.style.display = "table";
+        if(tablaId === 'tabla4x3'){
+            totalpares=6;
+        } else if(tablaId === 'tabla4x4'){
+            totalpares=8;
+        } else if(tablaId === 'tabla4x5'){
+            totalpares=10;
+        } else if(tablaId === 'tabla4x6'){
+            totalpares=12;
+        }        
+        resetearJuego();
+    }
+}
+        
+window.onload = function() {
+    resetearJuego(); // Comienza con 6 pares
+};
+
+</script>
 </head>
 <body>
     <h1>MEMORAMA</h1>
     <img src="./Imagenes/image.psd.jpg" alt="" width="device-width" hidden id="Winscreen">
-    <button id="wincon" onclick="resetearJuego(null)" hidden>Play again?</button>
-    <table id="tabla" class="tablauno">
+    <button id="wincon" onclick="resetearJuego(6)" hidden>Play again?</button>
+    <table id="tabla4x6" class="tablauno" style="display: none;">
         <tr id="c1">
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td>
         </tr>
@@ -124,12 +166,53 @@
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" data-id="12"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" data-id="12"></td>
         </tr>
     </table>
+    <table id="tabla4x5" class="tablauno" style="display: none;">
+        <tr id="c1">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="10"></td> 
+        </tr>
+        <tr id="c2">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="7"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/JASON.jpg" data-id="10"></td> 
+        </tr>
+        <tr id="c3">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="7"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/The thing.webp" data-id="11"></td>
+        </tr>
+        <tr id="c4">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Tomie-by-Junji-Ito-Review-2.jpg" data-id="11"></td> 
+        </tr>
+    </table>
+    <table id="tabla4x4" class="tablauno" style="display: none;">
+        <tr id="c1">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="2"></td>
+        </tr>
+        <tr id="c2">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="7"></td>
+        </tr>
+        <tr id="c3">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Ghostface.jpeg" data-id="7"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> 
+        </tr>
+        <tr id="c4">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/PENYWISE.jpg" data-id="8"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> 
+        </tr>
+    </table>
+    <table id="tabla4x3" class="tablauno" style="display: table;">
+        <tr id="c1">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td>
+        </tr>
+        <tr id="c2">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td>  
+        </tr>
+        <tr id="c3">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/BOBA.jpg" data-id="3"></td>  <td onclick="MostrarCarta(this)"><img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="5"></td>
+        </tr>
+        <tr id="c4">
+            <td onclick="MostrarCarta(this)"> <img src="./Imagenes/JigSaw.jpg" data-id="5"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Michael.jpeg" data-id="4"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Chucky.jpeg" data-id="6"></td>  
+        </tr>
+    </table>
     <div class="botones">
-        <button >4x3</button>
-        <button >4x4</button>
-        <button >4x5</button>
-        <button >4x6</button>
-        <button class="boton-reset" onclick="resetearJuego()">Reset</button>
+        <button onclick="cambiarTabla('tabla4x3')" >4x3</button>
+        <button onclick="cambiarTabla('tabla4x4')" >4x4</button>
+        <button onclick="cambiarTabla('tabla4x5')" >4x5</button>
+        <button onclick="cambiarTabla('tabla4x6')" >4x6</button>
     </div>
 </body>
 </html>

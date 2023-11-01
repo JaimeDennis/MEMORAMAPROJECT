@@ -20,7 +20,6 @@
             }
             return array;
         }
-
         function resetearJuego() {
             console.log(totalpares);
             x = 0;
@@ -81,7 +80,7 @@
             if(totalpares===8){
                 document.getElementById('tabla4x4').style.display='grid';
             }
-            if(totalpare===10){
+            if(totalpares===10){
                 document.getElementById('tabla4x5').style.display='grid';
             }
             if(totalpares===12){
@@ -179,6 +178,32 @@
     <button onclick="mutemusic(null)" id="mute">Pause</button>
     <audio src="./Music/Unseen-Horrors.mp3" autoplay hidden loop id="aud"></audio>
     <h1>MEMORAMA</h1>
+    <div class="container">
+        <h1>Geeks For Geeks <br>
+            Stop Watch</h1>
+        <div id="time">
+            <span class="digit" id="hr">
+                00</span>
+            <span class="txt">Hr</span>
+            <span class="digit" id="min">
+                00</span>
+            <span class="txt">Min</span>
+            <span class="digit" id="sec">
+                00</span>
+            <span class="txt">Sec</span>
+            <span class="digit" id="count">
+                00</span>
+        </div>
+        <div id="buttons">
+            <button class="btn" id="start">
+                Start</button>
+            <button class="btn" id="stop">
+                Stop</button>
+            <button class="btn" id="reset">
+                Reset</button>
+        </div>
+        <script src="script.js"></script>
+    </div>
     <img src="./Imagenes/image.psd.jpg" alt="" width="device-width" hidden id="Winscreen">
     <button id="wincon" onclick="cambiarTabla(tid)" hidden>Play again?</button>
     <table id="tabla4x6" class="tablauno" style="display: none;">

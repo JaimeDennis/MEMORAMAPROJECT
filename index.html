@@ -11,8 +11,6 @@
     <audio src="./Music/Unseen-Horrors.mp3" autoplay hidden loop id="aud"></audio>
     <h1>MEMORAMA</h1>
     <div class="container">
-        <h1>Geeks For Geeks <br>
-            Stop Watch</h1>
         <div id="time">
             <span class="digit" id="hr">
                 00</span>
@@ -34,10 +32,13 @@
             <button class="btn" id="reset">
                 Reset</button>
         </div>
-        <script src="script.js"></script>
     </div>
+    <script src="script.js"></script>
     <img src="./Imagenes/image.psd.jpg" alt="" width="device-width" hidden id="Winscreen">
     <button id="wincon" onclick="cambiarTabla(tid)" hidden>Play again?</button>
+    <textarea name="Nombre" id="Score" cols="30" rows="1" hidden></textarea>
+    <button id="sendScore" onclick="Submmitscore()" hidden>Enviar Puntuacion</button>
+    <button id="leaderboard" onclick="location.href='./Leaderboard.html'" hidden>Ver puntuaciones</button>
     <table id="tabla4x6" class="tablauno" style="display: none;">
         <tr id="c1">
             <td onclick="MostrarCarta(this)"> <img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/ArtTheClown.jpeg" data-id="1"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/BOBA.jpg" data-id="3"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Freddy.jpeg" data-id="2"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td> <td onclick="MostrarCarta(this)"><img src="./Imagenes/Sadako.webp" data-id="9"></td>

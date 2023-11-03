@@ -5,6 +5,7 @@ var au=document.getElementById('aud');
         let x=0;
         let y=0;
         let tid='tabla4x3';
+        let url="https://memorama-e79c5-default-rtdb.firebaseio.com/Leaderboard";
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -13,9 +14,19 @@ var au=document.getElementById('aud');
             return array;
         }
         function resetearJuego() {
+            timer = false;
+            hour = 0;
+            minute = 0;
+            second = 0;
+            count = 0;
+            document.getElementById('hr').innerHTML = "00";
+            document.getElementById('min').innerHTML = "00";
+            document.getElementById('sec').innerHTML = "00";
+            document.getElementById('count').innerHTML = "00";
             console.log(totalpares);
             x = 0;
             y = 0;
+            b=0;
             const imagenes = [
                 { id: 1, src: "./Imagenes/ArtTheClown.jpeg" },
                 { id: 2, src: "./Imagenes/Freddy.jpeg" },
@@ -66,6 +77,9 @@ var au=document.getElementById('aud');
             primeraImagen = null;
             document.getElementById('Winscreen').style.display='none';
             document.getElementById('wincon').style.display='none';
+            document.getElementById('sendScore').style.display='none';
+            document.getElementById('Score').style.display='none';
+            document.getElementById('leaderboard').style.display='none';
             if(totalpares===6){
                 document.getElementById('tabla4x3').style.display='grid';
             }
@@ -82,6 +96,11 @@ var au=document.getElementById('aud');
         //mucho
 
         function MostrarCarta(celda) {
+            b=b+1;
+            if(b===1){
+                timer = true;
+                stopWatch();
+            }
             if(y>2){
                 setTimeout(500);
                 y=0;
@@ -103,7 +122,7 @@ var au=document.getElementById('aud');
                                 y=y+1;
                                 x=x+1;
                                 if (x === totalpares){
-
+                                    timer = false;
                                     document.getElementById('tabla4x3').style.display='none';
                                     document.getElementById('tabla4x4').style.display='none';
                                     document.getElementById('tabla4x5').style.display='none';
@@ -111,7 +130,10 @@ var au=document.getElementById('aud');
                                     document.getElementById('wincon').style.display='block';
                                     document.getElementById('Winscreen').style.display='block';
                                     document.getElementById('wincon').style.opacity=1;
-                                    document.getElementById('Winscreen').style.opacity=1; 
+                                    document.getElementById('Winscreen').style.opacity=1;
+                                    document.getElementById('sendScore').style.display='inline-block';
+                                    document.getElementById('Score').style.display='inline-block';
+                                    document.getElementById('leaderboard').style.display='inline-block';
                                 }
                             } else {
                                 primeraImagen.elemento.style.display = 'none';
@@ -124,6 +146,31 @@ var au=document.getElementById('aud');
                 }
             }
             
+        }
+        async function Submmitscore(){
+            let player=document.getElementById("Score").value;
+            let time=`${hour}:${minute}:${second}:${count}`;
+            let mode=tid;
+            console.log(player);
+            console.log(time);
+            console.log(mode);
+            try {
+                    let jugador = {
+                        Nombre : player,
+                        Tiempo : time,
+                        Modo : mode
+                    };
+                    const config= {
+                        method:'POST',
+                        body : JSON.stringify(jugador),
+                        headers: {'Content-type' : 'application/json; charset=UTF-8'}
+                    }
+                    const response = await fetch(`${url}.json`,config);
+                    const data = await response.json();
+            } catch (error) {
+                    console.error("Error",error);
+            }
+            window.prompt("Puntuacion enviada");
         }
 //cambio para master
         function cambiarTabla(tablaId) {

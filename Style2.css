@@ -1,8 +1,9 @@
-body{
+html,body{
+    height: max-content;
     background-color: #000;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 23px;
-    cursor:pointer;
+    cursor: url(./knife/Normal\ select.cur),auto;
 }
 h1{
     text-align: center;
@@ -22,6 +23,7 @@ table{
     width: 100px; 
     height: 15px;  
     transition: 1s;
+    cursor: url(./knife/Normal\ select.cur),auto;
 }
 th {
     background-color: #ffffff;
@@ -40,6 +42,7 @@ td {
 
 .botones{
     display: block;
+    cursor: url(./knife/Normal\ select.cur),auto;
 }
 .ContenidoTablas {
     display: flex;
@@ -50,17 +53,24 @@ button{
     margin: 10px;
     padding: 25px 40px;
     border-radius: 15px;
-    cursor:pointer;
+    cursor: url(./knife/Normal\ select.cur),auto;
     border: none;
     color: #d5e405;
     background-color: #8a0606;
     transition: background-color 0.3s;
-    margin-top: 100%;
+
 }
+
 button:hover{
     background-color: #230658;
+    cursor: url(./knife/Link\ select.cur),auto;
 }
 
 .boton-reset{
     float: right;
-} 
+}
+.goback{
+    display: block;
+    position: relative;
+    margin-top: 50%;
+}

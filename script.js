@@ -14,6 +14,10 @@ var au=document.getElementById('aud');
             return array;
         }
         function resetearJuego() {
+            if(isPlaying){
+                winmusic(null);
+                mutemusic(null);
+            }
             timer = false;
             hour = 0;
             minute = 0;
@@ -134,6 +138,10 @@ var au=document.getElementById('aud');
                                     document.getElementById('sendScore').style.display='inline-block';
                                     document.getElementById('Score').style.display='inline-block';
                                     document.getElementById('leaderboard').style.display='inline-block';
+                                    if(isPlaying){
+                                        mutemusic(null);
+                                        winmusic(null);
+                                    }
                                 }
                             } else {
                                 primeraImagen.elemento.style.display = 'none';
@@ -141,7 +149,7 @@ var au=document.getElementById('aud');
                                 y=y+1;
                             }
                             primeraImagen = null;
-                        }, 500);
+                        }, 750);
                     }
                 }
             }
@@ -211,6 +219,18 @@ var au=document.getElementById('aud');
             }
             isPlaying = !isPlaying;
         }
+        function winmusic() {
+            if (isPlaying) {
+                w.pause();
+                w1.pause();
+                const button = document.getElementById("mute").innerText = "Play";
+            } else {
+                w1.play();
+                w.play();
+                const button = document.getElementById("mute").innerText = "Pause";
+            }
+            isPlaying = !isPlaying;
+        }
 let startBtn = document.getElementById("start");
         let stopBtn = document.getElementById("stop");
         let resetBtn = document.getElementById("reset");
@@ -222,11 +242,13 @@ let startBtn = document.getElementById("start");
  
         startBtn.addEventListener('click', function () {
             timer = true;
+            document.getElementById(tid).classList.replace("tablados","tablauno");
             stopWatch();
         });
         
         stopBtn.addEventListener('click', function () {
             timer = false;
+            document.getElementById(tid).classList.replace("tablauno","tablados");
         });
         
         resetBtn.addEventListener('click', function () {
@@ -239,6 +261,7 @@ let startBtn = document.getElementById("start");
             document.getElementById('min').innerHTML = "00";
             document.getElementById('sec').innerHTML = "00";
             document.getElementById('count').innerHTML = "00";
+            resetearJuego();
         });
  
         function stopWatch() {

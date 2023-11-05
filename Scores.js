@@ -7,6 +7,7 @@ function Score(tabid){
     tid=tabid;
     consultarAsync();
 }
+var isPlaying=true;
 async function consultarAsync(){
     try {
         const response= await fetch(`${url}.json`);
@@ -32,4 +33,14 @@ function rendertable(data){
     });
     console.log(rowHTML);
     tbody.innerHTML =rowHTML;
+}
+function mutemusic() {
+    if (isPlaying) {
+        aud.pause();
+        const button = document.getElementById("mute").innerText = "Play";
+    } else {
+        aud.play();
+        const button = document.getElementById("mute").innerText = "Pause";
+    }
+    isPlaying = !isPlaying;
 }

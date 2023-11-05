@@ -1,5 +1,4 @@
-html,body{
-    height: max-content;
+body{
     background-color: #000;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 23px;
@@ -14,15 +13,12 @@ div{
     text-align: center;
 }
 table{
-    display: block;
+    display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    border-spacing: 2px;
-    margin: auto;
-    width: 100px; 
-    height: 15px;  
-    transition: 1s;
+    border-spacing: 15px;
+    margin: 0 auto;
     cursor: url(./knife/Normal\ select.cur),auto;
 }
 
@@ -31,13 +27,16 @@ td {
     border-radius: 15px;
     width: 100px; 
     height: 150px;
-    cursor: pointer;
     background-image: url(./Imagenes/Baraja.jpeg);
     background-size: cover;
     cursor: url(./knife/Link\ select.cur),auto;
     transition: 1s;
 }
-
+td:active{
+    transition: transform 0.2s;
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+}
 .botones{
     display: block;
     cursor: url(./knife/Normal\ select.cur),auto;
@@ -70,13 +69,12 @@ button{
     padding: 25px 40px;
     border-radius: 15px;
     cursor: url(./knife/Normal\ select.cur),auto;
+    cursor:pointer;
     border: none;
     color: #d5e405;
     background-color: #8a0606;
     transition: background-color 0.3s;
-
 }
-
 button:hover{
     background-color: #230658;
     cursor: url(./knife/Link\ select.cur),auto;

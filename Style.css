@@ -1,6 +1,8 @@
-body{
+@font-face { font-family: Bloody; src: url(./bloody/BLOODY.TTF); } 
+
+html,body{
     background-color: #000;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Bloody, 'Arial Narrow', Arial, sans-serif;
     font-size: 23px;
     cursor: url(./knife/Normal\ select.cur),auto;
 }
@@ -76,13 +78,14 @@ img{
 }
 
 button{
+    font-family: Bloody;
     margin: 10px;
     padding: 25px 40px;
     border-radius: 15px;
     cursor: url(./knife/Normal\ select.cur),auto;
     cursor:pointer;
     border: none;
-    color: #d5e405;
+    color: #ffffff;
     background-color: #8a0606;
     transition: background-color 0.3s;
 }

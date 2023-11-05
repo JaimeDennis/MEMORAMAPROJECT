@@ -13,6 +13,17 @@ div{
     text-align: center;
 }
 table{
+    pointer-events: all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    border-spacing: 15px;
+    margin: 0 auto;
+    cursor: url(./knife/Normal\ select.cur),auto;
+}
+.tablados{
+    pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;

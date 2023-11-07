@@ -178,7 +178,7 @@ var au=document.getElementById('aud');
             } catch (error) {
                     console.error("Error",error);
             }
-            window.prompt("Puntuacion enviada");
+            window.alert("Puntuacion enviada");
         }
 //cambio para master
         function cambiarTabla(tablaId) {

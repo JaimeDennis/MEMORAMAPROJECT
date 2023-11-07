@@ -26,15 +26,15 @@ function rendertable(data){
     Object.keys(data).forEach(key =>{
         console.log(data[key]);
         if(`${data[key].Modo}`=== tid){
-            arreglo.push([`${data[key].Nombre}`,`${data[key].Tiempo}`]);
+            arreglo.push([`${data[key].Tiempo}`,`${data[key].Nombre}`]);
         }
     });
     console.log(arreglo);
     arreglo.sort(sortFunction);
     for(let i=0;i<arreglo.length;i++){
         rowHTML += `<tr>
-        <td>${arreglo[i][0]}</td>
         <td>${arreglo[i][1]}</td>
+        <td>${arreglo[i][0]}</td>
     </tr>`;
     }
     console.log(rowHTML);

@@ -55,7 +55,7 @@ td {
     background-image: url(./Imagenes/Baraja.jpeg);
     background-size: cover;
     cursor: url(./knife/Link\ select.cur),auto;
-    transition: 1s;
+    transition: 0.2s;
 }
 td:active{
     transition: transform 0.2s;
@@ -68,6 +68,7 @@ td:active{
 }
 
 img{
+    border-radius: 15px;
     width: 100%;
     height: 100%;
     display: none;

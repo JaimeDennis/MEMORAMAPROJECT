@@ -22,17 +22,32 @@ function rendertable(data){
     console.log(data);
     let tbody=document.getElementById("HS");
     let rowHTML ="";
+    var arreglo=[];
     Object.keys(data).forEach(key =>{
         console.log(data[key]);
         if(`${data[key].Modo}`=== tid){
-            rowHTML += `<tr>
-                        <td>${data[key].Nombre}</td>
-                        <td>${data[key].Tiempo}</td>
-                    </tr>`;
+            arreglo.push([`${data[key].Nombre}`,`${data[key].Tiempo}`]);
         }
     });
+    console.log(arreglo);
+    arreglo.sort(sortFunction);
+    for(let i=0;i<arreglo.length;i++){
+        rowHTML += `<tr>
+        <td>${arreglo[i][0]}</td>
+        <td>${arreglo[i][1]}</td>
+    </tr>`;
+    }
     console.log(rowHTML);
     tbody.innerHTML =rowHTML;
+}
+
+function sortFunction(a, b) {
+    if (a[0] === b[0]) {
+        return 0;
+    }
+    else {
+        return (a[0] < b[0]) ? -1 : 1;
+    }
 }
 function mutemusic() {
     if (isPlaying) {
